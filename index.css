@@ -1,0 +1,35 @@
+body {
+    background-color: green;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: goldenrod;
+}
+
+h2 {
+    text-align: center;
+    font-style: italic;
+    color: whitesmoke;
+}
+
+button {
+    display: block;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px 10px;
+    background-color: goldenrod;
+    color: rgb(69, 67, 62);
+    width: 400px;
+    font-size: xx-large;
+    border-width: 0px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: rgb(117, 106, 68);
+    border-color: rgb(116, 150, 113);
+    border-width: 5px;
+}
