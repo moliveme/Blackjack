@@ -5,8 +5,6 @@ let cards = [] // ordered list/array
 
 let sum = 0
 let cardsStr = ""
-let hasWon = false
-let isAlive = false
 
 let message = ""
 
@@ -16,7 +14,31 @@ let sumEl = document.querySelector("#sum-el")
 
 let cardsel = document.getElementById("cards-el")
 
+// updating money as won/lose
+
+// JS class! (also a dictionary!) (also composite DTs)
+let player = {
+
+    name: "You",
+    chips: "145"
+
+}
+
+let hasWon = false
+let isAlive = false
+
 function startGame() {
+
+    if (isAlive) {
+
+        document.getElementById("error").innerText = "Wrong move"
+        return
+
+    }
+
+    hasWon = false
+
+    document.getElementById("error").innerText = ""
 
     isAlive = true
 
@@ -31,46 +53,48 @@ function startGame() {
 
 function renderGame() {
 
-    if (sum < 21) {
-        message = "draw new card?"
-        console.log(message)
-    } else if (sum === 21) {
-        message = "won!"
-        console.log(message)
-        hasWon = true
-        cards = []
-        renderGame()
-    } else {
-        message = "lost :("
-        console.log(message)
-        isAlive = false
-        cards = []
-        renderGame()
-    }
-    
-    messageL.textContent = message
-
     if (cards.length != 0) {
 
         sum = cards.reduce((a, b) => (a + b))
         sumEl.textContent = "Sum: " + sum
 
         cardsStr = cards.reduce((a, b) => (a + " " + b + " "))
+        cardsel.textContent = "Cards: " + cardsStr
+
+        if (isAlive) {
+            if (sum < 21 && sum > 3) {
+                message = "draw new card?"
+                console.log(message)
+            } else if (sum === 21) {
+                message = "won!"
+                console.log(message)
+                hasWon = true
+                isAlive = false
+                renderGame()
+            } else if (sum > 21) {
+                message = "lost :("
+                console.log(message)
+                isAlive = false
+                renderGame()
+            }
+        } else {
+
+            cards = []
+            sum = 0
+
+        }
+
+        messageL.textContent = message
         
-    } else {
-
-        sumEl.textContent = "Sum: "
-        cardsStr = " "
     }
 
-    cardsel.textContent = "Cards: " + cardsStr
+    document.getElementById("player-el").innerText = player.name + ": $" + player.chips
 
-    if (hasWon === true) {
-    
-    }
 }
 
 function newCard() {
+
+    document.getElementById("error").innerText = ""
 
     if (isAlive) {
 
